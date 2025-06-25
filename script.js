@@ -6,8 +6,8 @@ const users = [
   { id: 5, name: "Pari", age: 27 },
 ];
 const FilterUser = document.querySelector(".UserContainer");
-const button = document.querySelector('button')
-const input = document.querySelector('input')
+const button = document.querySelector("button");
+const input = document.querySelector("input");
 
 const renderUser = (list) => {
   let str = " ";
@@ -19,12 +19,20 @@ const renderUser = (list) => {
         <p><b>Age:</b>${user.age}</p>
         </div>
         `)
-    );
-    FilterUser.innerHTML=str;
+  );
+  FilterUser.innerHTML = str;
 };
-window.onload = () =>{
-    renderUser(users);
+window.onload = () => {
+  renderUser(users);
 };
 button.onclick = () => {
-    let UserInput = input.value.toLowerCase();
-}
+  let UserInput = input.value.toLowerCase();
+  const SearchUser = users.filter((user) =>
+    user.name.toLowerCase().includes(UserInput)
+  );
+  if(UserInput.length > 0) {
+    renderUser(SearchUser)
+  } else{
+  FilterUser.innerHTML = '<p>sorry</p>';
+  }
+};
